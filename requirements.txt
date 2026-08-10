@@ -1,0 +1,7 @@
+strands-agents
+strands-agents-tools
+chromadb
+sentence-transformers
+pymupdf
+pydantic
+python-dotenv
