@@ -10,8 +10,10 @@ collection = client.get_or_create_collection(
     name="drug_labels"
 )
 
-def store_chunks(chunks: list[str], source: str):
-    embeddings = model.encode(chunks).tolist()
+def store_chunks(chunks: list[dict], source: str):
+    
+    documents = [chunk["text"] for chunk in chunks]
+    embeddings = model.encode(documents).tolist()
 
     ids = [
         f"{source}_{i}"
@@ -21,14 +23,17 @@ def store_chunks(chunks: list[str], source: str):
     metadatas = [
         {
             "source": source,
-            "chunk_id": i
+            "chunk_id": i,
+            "page_number": chunk["page_number"]
         }
-        for i in range(len(chunks))
+        for i, chunk in (enumerate(chunks))
     ]
 
     collection.add(
         ids=ids,
-        documents=chunks,
+        documents=documents,
         embeddings=embeddings,
         metadatas=metadatas
     )
+    
+print(collection.count())
