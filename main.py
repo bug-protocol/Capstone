@@ -1,9 +1,7 @@
-from agents.safety_agent import (
-    safety_agent
+from agents.supervisor import supervisor
+
+result = supervisor(
+    "What are the approved indications for Paracetamol?"
 )
 
-print(
-    safety_agent(
-        "What adverse events are reported for Paracetamol?"
-    )
-)
+print(result)

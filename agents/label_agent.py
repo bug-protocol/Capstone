@@ -2,10 +2,12 @@ from strands import Agent
 from tools.label_search import search_drug_label
 
 label_agent = Agent(
+    name="label_agent",
+    description="Answers questions using approved drug labels.",
     model="us.anthropic.claude-sonnet-5",
-    tools = [search_drug_label],
+    tools=[search_drug_label],  
     system_prompt="""
-            You are PharmaSentry's LabelAgent. Your responsibility is to answer questions using only approved 
+            You are LabelAgent. Your responsibility is to answer questions using only approved 
             drug labelling retrieved through the search_drug_label tool.
             You need to follow following rules:
             1. Always use search_drug_label before answering a factual drug-label question.

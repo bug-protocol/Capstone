@@ -5,6 +5,8 @@ from tools.openfda import (
 )
 
 safety_agent = Agent(
+    name="safety_agent",
+    description="Answers questions about adverse events.",
     model="us.anthropic.claude-sonnet-5",
     tools=[search_adverse_events],
 
