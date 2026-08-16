@@ -6,13 +6,13 @@ from agents.trials_agent import trials_agent
 from tools.escalation import escalate_to_human
 
 supervisor = Agent(
-    model="us.anthropic.claude-sonnet-5",
+    model="global.anthropic.claude-sonnet-5",
     tools=[
         label_agent, safety_agent, trials_agent, escalate_to_human
     ], # agents can be used as tools
     
     system_prompt="""
-        You are a supervisor agent. 
+        You are a supervisor agent.     
         
         You never answer questions yourself.
 

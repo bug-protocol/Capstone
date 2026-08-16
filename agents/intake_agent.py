@@ -3,7 +3,7 @@ from strands import Agent
 from models.adverse_event import AdverseEventCase
 
 intake_agent = Agent(
-    model="us.anthropic.claude-sonnet-5",
+    model="global.anthropic.claude-sonnet-5",
     system_prompt="""
                 You are an Intake Agent.
 

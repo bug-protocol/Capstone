@@ -1,0 +1,70 @@
+# Version control and development
+.git/
+.gitignore
+.gitattributes
+.github/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+ENV/
+.egg-info/
+*.egg
+*.whl
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Logs and cache
+*.log
+logs/
+.cache/
+**/.cache/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Data and large files
+data/chroma_db/
+*.db
+*.sqlite
+*.sqlite3
+
+# ML/Cache directories
+huggingface/
+transformers_cache/
+sentence_transformers/
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Documentation
+README.md
+AGENTS.md
+readme.md
+*.md

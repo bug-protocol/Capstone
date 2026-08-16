@@ -4,7 +4,7 @@ from tools.label_search import search_drug_label
 label_agent = Agent(
     name="label_agent",
     description="Answers questions using approved drug labels.",
-    model="us.anthropic.claude-sonnet-5",
+    model="global.anthropic.claude-sonnet-5",
     tools=[search_drug_label],  
     system_prompt="""
             You are LabelAgent. Your responsibility is to answer questions using only approved 

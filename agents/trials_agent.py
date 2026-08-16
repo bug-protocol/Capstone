@@ -4,7 +4,7 @@ from tools.clinical_trials import search_clinical_trials
 trials_agent = Agent(
     name="trials_agent",
     description="Answers questions about clinical trials.",
-    model="us.anthropic.claude-sonnet-5",
+    model="global.anthropic.claude-sonnet-5",
     tools=[search_clinical_trials],
     system_prompt="""
                 You're TrialsAgent. You need to follow following rules:
