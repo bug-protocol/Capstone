@@ -10,7 +10,7 @@ Capstone is an enterprise-grade drug-safety and pharmacovigilance assistant buil
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                                FastAPI Backend                                  │
 │  - JWT Auth (/auth/signup, /auth/login, /auth/refresh)                          │
-│  - SSE Streaming Chat (/chat) & Session Turn History                            │
+│  - Session Turn History                            │
 │  - Non-Conversational AE Intake (/intake) & Review Queue (/cases)               │
 │  - PII Redaction & OpenTelemetry Observability Instrumentation                  │
 │  - PostgreSQL Persistence (Users, Sessions, Messages, Cases)           │
