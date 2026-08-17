@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY agents/ ./agents/
 COPY tools/ ./tools/
 COPY models/ ./models/
-COPY main.py app.py constraints.txt ./
+COPY main.py ./
 COPY data/ ./data/
 
 # Create non-root user for security

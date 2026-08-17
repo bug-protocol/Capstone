@@ -1,5 +1,5 @@
 from collections import Counter
-import requests # for letting python communicate with web APIs
+import requests
 from strands import tool
 
 
@@ -8,17 +8,10 @@ def search_adverse_events(
     drug_name: str,
     limit: int = 20,
 ):
-    """
-    Return the most frequently reported
-    adverse events.
-    """
-
     url = "https://api.fda.gov/drug/event.json"
 
     params = {
-        "search":
-        f'patient.drug.medicinalproduct:"{drug_name}"',
-
+        "search": f'patient.drug.medicinalproduct:"{drug_name}"',
         "limit": limit,
     }
 
@@ -34,28 +27,11 @@ def search_adverse_events(
 
     counter = Counter()
 
-    for report in data.get(
-        "results",
-        [],
-    ):
-
-        reactions = report.get(
-            "patient",
-            {},
-        ).get(
-            "reaction",
-            [],
-        )
-
+    for report in data.get("results", []):
+        reactions = report.get("patient", {}).get("reaction", [])
         for reaction in reactions:
-
-            name = reaction.get(
-                "reactionmeddrapt"
-            )
-
+            name = reaction.get("reactionmeddrapt")
             if name:
                 counter[name] += 1
 
-    return dict(
-        counter.most_common(10)
-    )
+    return dict(counter.most_common(10))

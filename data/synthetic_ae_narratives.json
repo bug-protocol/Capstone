@@ -1,0 +1,32 @@
+[
+  {
+    "id": "narrative-001-standard",
+    "category": "standard",
+    "description": "Clear single-drug adverse event with typical gastrointestinal reaction",
+    "raw_narrative": "Patient John Doe (DOB: 12/04/1978, Phone: 555-839-2019) was initiated on Ozempic (semaglutide) 0.5 mg subcutaneous injection weekly for glycemic management. On day 3 post-injection, the subject experienced severe acute nausea, persistent vomiting, and abdominal pain. Ozempic was temporarily discontinued and the patient received IV hydration. Symptoms resolved within 48 hours without hospital admission."
+  },
+  {
+    "id": "narrative-002-standard",
+    "category": "standard",
+    "description": "Severe hypersensitivity allergic reaction to macrolide antibiotic",
+    "raw_narrative": "Subject Jane Smith (MRN: 9482014, Email: jane.smith78@email.com) was prescribed Azithromycin 500 mg daily for community-acquired pneumonia. Following the second dose, she developed generalized urticaria, facial angioedema, pruritus, and mild dyspnea. Azithromycin was immediately discontinued and oral antihistamines were administered. The allergic rash improved gradually over 72 hours."
+  },
+  {
+    "id": "narrative-003-ambiguous",
+    "category": "hard_ambiguous",
+    "description": "Complex polypharmacy scenario with confounding timeline and multiple potential causative agents",
+    "raw_narrative": "A 62-year-old male with chronic osteoarthritis and type 2 diabetes was taking Paracetamol 1000 mg three times daily along with daily atorvastatin and recently initiated lisinopril. Over the past 10 days, he noted progressive jaundice, right upper quadrant tenderness, and elevated ALT/AST (>5x ULN). The clinician suspects drug-induced liver injury (DILI) but is uncertain whether high-dose Paracetamol or atorvastatin interaction was the primary culprit. Paracetamol was withheld; liver enzymes are slowly trending downward."
+  },
+  {
+    "id": "narrative-004-ambiguous",
+    "category": "hard_ambiguous",
+    "description": "Vague timeline and mild non-specific symptoms with unconfirmed brand",
+    "raw_narrative": "Patient reports that sometime last month after taking an over-the-counter painkiller containing paracetamol 500mg, they felt mildly dizzy and lightheaded after skipping lunch. No medical intervention was sought and symptoms resolved spontaneously within an hour."
+  },
+  {
+    "id": "narrative-005-pii-heavy",
+    "category": "pii_stress_test",
+    "description": "Narrative packed with direct identifiers (SSN, phone, email, full names) to stress-test PII redaction",
+    "raw_narrative": "Dr. Robert Vance reporting on patient Michael Scott (SSN: 123-45-6789, born on 03/15/1965, contact: michael.scott@dunder.com, cell 212-555-0199). Patient was prescribed Azithromycin 250 mg for sinusitis. Developed palpitations and mild dizziness. Medication was discontinued; ECG was unremarkable and symptoms resolved."
+  }
+]

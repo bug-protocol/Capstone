@@ -1,0 +1,13 @@
+{
+  "sample-user-001": {
+    "allergies": [
+      "Penicillin",
+      "Macrolide antibiotics"
+    ],
+    "chronic_conditions": [
+      "Type 2 Diabetes",
+      "Mild Hypertension"
+    ],
+    "role": "Clinician (Internal Medicine)"
+  }
+}

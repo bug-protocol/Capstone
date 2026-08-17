@@ -1,7 +1,6 @@
 import requests
 from strands import tool
 
-
 OPENFDA_URL = "https://api.fda.gov/drug/label.json"
 
 SUPPORTED_DRUGS = {
@@ -13,22 +12,6 @@ SUPPORTED_DRUGS = {
 
 @tool
 def search_drug_label(drug_name: str, section: str) -> dict:
-    """
-    Search the openFDA drug labeling database.
-
-    Supported drugs:
-    - Azithromycin
-    - Ozempic
-    - Paracetamol / acetaminophen
-
-    Supported sections include:
-    - indications_and_usage
-    - contraindications
-    - warnings_and_cautions
-    - adverse_reactions
-    - dosage_and_administration
-    """
-
     drug_name = drug_name.lower().strip()
 
     if drug_name not in SUPPORTED_DRUGS:
