@@ -130,6 +130,6 @@ pytest tests/test_backend.py -v
 
 ### 4. Start the FastAPI Backend Server
 ```bash
-python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 Interactive Swagger API documentation available at: `http://localhost:8000/docs`
