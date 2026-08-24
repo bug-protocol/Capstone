@@ -16,7 +16,7 @@ class Settings(BaseSettings):
 
     DATABASE_URL: str = "postgresql+asyncpg://postgres:postgrespassword2026@localhost:5432/capstonedb"
 
-    AGENTCORE_RUNTIME_ARN: Optional[str] = "arn:aws:bedrock-agentcore:ap-south-1:025066239748:runtime/Capstone_Agent-MFGzn2CPo6"
+    AGENTCORE_RUNTIME_ARN: Optional[str] = None
     AGENTCORE_MEMORY_ID: Optional[str] = None
     AWS_REGION: str = "ap-south-1"
     AWS_ACCESS_KEY_ID: Optional[str] = None

@@ -5,6 +5,7 @@ from agents.safety_agent import safety_agent
 from agents.trials_agent import trials_agent
 from agents.memory import get_short_term_session_manager, ltm_store
 from tools.escalation import escalate_to_human
+from strands import tool
 
 BASE_SYSTEM_PROMPT = """
 You are a supervisor agent in Capstone, an enterprise drug-safety and medical-information assistant.
@@ -30,10 +31,16 @@ def get_supervisor(session_id: str = "default-session", actor_id: str = "default
     ltm_context = ltm_store.format_ltm_context(actor_id)
     
     full_prompt = BASE_SYSTEM_PROMPT.strip() + ltm_context
+
+    @tool
+    def save_patient_fact(key: str, value: str):
+        """Saves a persistent medical fact or profile information about the current user to Long-Term Memory (LTM)."""
+        ltm_store.set_actor_fact(actor_id=actor_id, key=key, value=value)
+        return f"Successfully saved {key} = {value} to patient's LTM profile."
     
     return Agent(
         model="global.anthropic.claude-sonnet-5",
-        tools=[label_agent, safety_agent, trials_agent, escalate_to_human],
+        tools=[label_agent, safety_agent, trials_agent, escalate_to_human, save_patient_fact],
         session_manager=session_manager,
         system_prompt=full_prompt,
     )
