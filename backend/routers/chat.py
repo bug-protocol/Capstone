@@ -1,4 +1,5 @@
 import uuid
+import json
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.responses import StreamingResponse
@@ -59,13 +60,42 @@ async def chat_endpoint(
     await db.commit()
 
     if request.stream:
-        return StreamingResponse(
-            stream_agent_response(
+        async def stream_and_save():
+            full_response_text = ""
+            citations_data = []
+            
+            async for chunk_str in stream_agent_response(
                 prompt=request.message,
                 session_id=session.id,
                 actor_id=current_user.username,
                 correlation_id=correlation_id,
-            ),
+            ):
+                yield chunk_str
+                
+                if chunk_str.startswith("data: "):
+                    try:
+                        data_str = chunk_str[6:].strip()
+                        if data_str:
+                            event = json.loads(data_str)
+                            if event.get("type") == "token":
+                                full_response_text += event.get("content", "")
+                            elif event.get("type") == "citation":
+                                citations_data = event.get("citations", [])
+                    except Exception:
+                        pass
+            
+            assistant_msg = ChatMessage(
+                session_id=session.id,
+                role="assistant",
+                content=full_response_text.strip(),
+                correlation_id=correlation_id,
+                citations=citations_data,
+            )
+            db.add(assistant_msg)
+            await db.commit()
+
+        return StreamingResponse(
+            stream_and_save(),
             media_type="text/event-stream",
             headers={
                 "Cache-Control": "no-cache",

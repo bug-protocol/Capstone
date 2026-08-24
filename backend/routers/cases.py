@@ -22,6 +22,7 @@ async def list_triage_cases(
     drug_name: Optional[str] = Query(default=None),
     limit: int = Query(default=20, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
+    mine_only: bool = Query(default=False),
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
@@ -35,6 +36,10 @@ async def list_triage_cases(
     if drug_name:
         query = query.where(TriageCase.drug_name.ilike(f"%{drug_name}%"))
         count_query = count_query.where(TriageCase.drug_name.ilike(f"%{drug_name}%"))
+        
+    if mine_only:
+        query = query.where(TriageCase.user_id == current_user.id)
+        count_query = count_query.where(TriageCase.user_id == current_user.id)
 
     total_res = await db.execute(count_query)
     total = total_res.scalar() or 0

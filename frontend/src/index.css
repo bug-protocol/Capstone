@@ -1,0 +1,65 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --sidebar-bg: #f8fafc;
+  --sidebar-border: #e2e8f0;
+  --accent-color: #3b82f6; /* Light bluish */
+  --accent-hover: #2563eb;
+  --nav-bg: #ffffff;
+  --nav-border: #e2e8f0;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --message-user-bg: #eff6ff;
+  --message-agent-bg: #f3f4f6;
+  --item-hover: #f1f5f9;
+}
+
+[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #e5e7eb;
+  --sidebar-bg: #1e1e1e;
+  --sidebar-border: #333333;
+  --accent-color: #60a5fa; /* Lighter blue for dark mode */
+  --accent-hover: #93c5fd;
+  --nav-bg: #1e1e1e;
+  --nav-border: #333333;
+  --card-bg: #2d2d2d;
+  --input-bg: #2d2d2d;
+  --input-border: #4b5563;
+  --message-user-bg: #1e3a8a;
+  --message-agent-bg: #374151;
+  --item-hover: #333333;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  background: var(--card-bg);
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.logout-button:hover {
+  background: #ef4444;
+  color: white;
+}
