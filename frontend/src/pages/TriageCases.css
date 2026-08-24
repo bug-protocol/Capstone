@@ -156,6 +156,28 @@
 .badge-escalated { background: #fee2e2; color: #991b1b; }
 .badge-resolved { background: #e0e7ff; color: #3730a3; }
 
+.tc-delete-btn {
+  background: transparent;
+  border: none;
+  color: #888;
+  padding: 0.4rem;
+  margin-left: 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, background-color 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+
+.tc-delete-btn:hover {
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.1);
+  transform: scale(1.1);
+}
+
+
 .tc-item-details {
   padding: 1.25rem;
   border-top: 1px solid var(--sidebar-border);

@@ -170,3 +170,21 @@ async def get_session_history(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Session not found")
 
     return session
+
+@router.delete("/sessions/{session_id}")
+async def delete_session(
+    session_id: str,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    stmt = select(ChatSession).where(ChatSession.id == session_id, ChatSession.user_id == current_user.id)
+    result = await db.execute(stmt)
+    session = result.scalar_one_or_none()
+
+    if not session:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Session not found")
+
+    await db.delete(session)
+    await db.commit()
+
+    return {"message": "Session deleted successfully"}

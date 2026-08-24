@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { MessageSquare, Plus, Activity, FileWarning, Moon, Sun, User } from 'lucide-react';
+import { MessageSquare, Plus, Activity, FileWarning, Moon, Sun, User, Trash2 } from 'lucide-react';
 import api from '../api';
 import './DashboardLayout.css';
 
@@ -50,6 +50,22 @@ const DashboardLayout = () => {
     navigate('/auth');
   };
 
+  const handleDeleteSession = async (e, sessionId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!window.confirm("Are you sure you want to delete this chat session?")) return;
+
+    try {
+      await api.delete(`/chat/sessions/${sessionId}`);
+      setSessions(prev => prev.filter(s => s.id !== sessionId));
+      if (location.pathname === `/chat/${sessionId}`) {
+        navigate('/');
+      }
+    } catch (err) {
+      console.error("Failed to delete session", err);
+    }
+  };
+
   return (
     <div className="dashboard-container">
       <header className="dashboard-navbar">
@@ -85,18 +101,27 @@ const DashboardLayout = () => {
             <h3>Recent Chats</h3>
             <div className="session-list">
               {sessions.map(s => (
-                <NavLink 
-                  key={s.id} 
-                  to={`/chat/${s.id}`} 
-                  className={({ isActive }) => `session-item ${isActive ? 'active' : ''}`}
-                >
-                  <MessageSquare size={14} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'middle' }}/>
-                  {s.title}
-                </NavLink>
+                <div key={s.id} className="session-item-wrapper">
+                  <NavLink 
+                    to={`/chat/${s.id}`} 
+                    className={({ isActive }) => `session-item ${isActive ? 'active' : ''}`}
+                  >
+                    <MessageSquare size={14} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'middle', flexShrink: 0 }}/>
+                    <span className="session-title">{s.title}</span>
+                  </NavLink>
+                  <button 
+                    className="delete-session-btn" 
+                    onClick={(e) => handleDeleteSession(e, s.id)}
+                    title="Delete chat session"
+                  >
+                    <Trash2 size={13} />
+                  </button>
+                </div>
               ))}
             </div>
           </div>
         </aside>
+
 
         <main className="dashboard-main">
           <Outlet />

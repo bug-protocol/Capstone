@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
 import './TriageCases.css';
-import { Filter, Activity, FileText } from 'lucide-react';
+import { Filter, Activity, FileText, Trash2 } from 'lucide-react';
 
 const TriageCases = () => {
   const [cases, setCases] = useState([]);
@@ -26,6 +26,19 @@ const TriageCases = () => {
       console.error('Failed to fetch cases', err);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDeleteCase = async (e, caseId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!window.confirm("Are you sure you want to delete this triage case?")) return;
+
+    try {
+      await api.delete(`/cases/${caseId}`);
+      setCases(prev => prev.filter(c => c.id !== caseId));
+    } catch (err) {
+      console.error('Failed to delete case', err);
     }
   };
 
@@ -68,9 +81,15 @@ const TriageCases = () => {
                       {c.drug_name || 'Unknown'}
                     </span>
                     <span className="tc-summary-date">{new Date(c.created_at).toLocaleDateString()}</span>
-                    <span className={`tc-status badge-${c.status.toLowerCase()}`}>{c.status}</span>
+                    <button 
+                      className="tc-delete-btn" 
+                      onClick={(e) => handleDeleteCase(e, c.id)}
+                      title="Delete case"
+                    >
+                      <Trash2 size={15} />
+                    </button>
                   </div>
-                  
+
                   {isExpanded && (
                     <div className="tc-item-details" onClick={(e) => e.stopPropagation()}>
                       <div className="tc-info-row">
@@ -81,13 +100,6 @@ const TriageCases = () => {
                       <div className="tc-narrative-section">
                         <h5>Redacted Narrative</h5>
                         <p>{c.narrative_redacted}</p>
-                      </div>
-                      
-                      <div className="tc-card-footer">
-                        <span>Assigned Reviewer: {c.assigned_reviewer || 'Unassigned'}</span>
-                        <span className={`seriousness ${c.seriousness ? 'severe' : 'mild'}`}>
-                          {c.seriousness ? 'Serious' : 'Non-Serious'}
-                        </span>
                       </div>
                     </div>
                   )}

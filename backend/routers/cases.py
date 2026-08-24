@@ -96,3 +96,41 @@ async def update_case_status(
     await db.refresh(case)
 
     return case
+
+
+@router.delete("/{case_id}")
+async def delete_case(
+    case_id: str,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    stmt = select(TriageCase).where(TriageCase.id == case_id)
+    res = await db.execute(stmt)
+    case = res.scalar_one_or_none()
+
+    if not case:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Triage case not found")
+
+    await db.delete(case)
+    await db.commit()
+
+    return {"message": "Case deleted successfully"}
+
+
+@router.delete("/{case_id}")
+async def delete_cases(
+    case_id: str,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    stmt = select(TriageCase).where(TriageCase.id == case_id)
+    res = await db.execute(stmt)
+    case = res.scalar_one_or_none()
+
+    if not case:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Triage case not found")
+
+    await db.delete(case)
+    await db.commit()
+
+    return {"message": "Case deleted successfully"}
