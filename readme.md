@@ -138,6 +138,4 @@ Interactive Swagger API documentation available at: `http://localhost:8000/docs`
 
 <img width="1862" height="828" alt="Screenshot 2026-11-18 023852" src="https://github.com/user-attachments/assets/ed1893c1-2ffb-41ab-860f-9b09bc340412" />
 
-<img width="1917" height="836" alt="Screenshot 2026-11-18 024004" src="https://github.com/user-attachments/assets/ec0ea110-3416-4427-b897-e76bd7c77a83" />
-
 <img width="1907" height="677" alt="Screenshot 2026-11-18 024034" src="https://github.com/user-attachments/assets/d92d6986-69b5-49d6-b969-12a255ddc35d" />
